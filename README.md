@@ -1,5 +1,4 @@
 # Dependencies
-
 astroid==2.2.5
 colorama==0.4.1
 dj-database-url==0.5.0
