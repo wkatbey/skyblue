@@ -1,0 +1,51 @@
+{% extends 'media/media_base.html' %} 
+{% load static %} 
+
+{% block custom_head_elements %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src='https://cdn.tiny.cloud/1/9lidlfl9gfd74zusr0iykq72dtxk48gnba2vupju5j0gdmfs/tinymce/5/tinymce.min.js'></script>
+<script>
+  tinymce.init({selector:'textarea'});
+</script>
+{% endblock %}
+
+{% block hero-image-type %}
+<div class="hero-media-small-image">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block media_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    {{ media_entry.title }}
+</p>
+{% endblock %}
+
+{% block media_body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        {{ media_entry.author.first_name }} {{ media_entry.author.last_name }},
+        {{ media_entry.date_of_submission }}
+        {% if user.is_authenticated and media_entry.author.id == user.id %}
+        <a class="gray-link media-heading-icon" href="{% url 'media:media-update' media_entry.id %}">
+            <i class="fas fa-edit"></i>
+        </a>
+        <a href="{% url 'media:media-delete' media_entry.id %}" class="gray-link media-heading-icon">
+            <i class="far fa-trash-alt"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-6">
+        {{ media_entry.text_entry | safe }}
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

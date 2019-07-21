@@ -1,0 +1,51 @@
+{% extends 'media/media_base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+
+{% block hero-image-type %}
+<div class="hero-media-image">
+{% endblock %} 
+
+{% block hero-image-text %}
+    <div class="container-fluid hero-media-text">
+        <p class="hero-media-heading text-center">SkyBlue Mediaging</p>
+        <p class="hero-media-subheading text-center">
+            An Open-Source Platform
+        </p>
+    </div>
+{% endblock %} 
+
+{% block media_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    Create Your Media
+</p>
+{% endblock %}
+
+{% block media_body %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-lg-6">
+                {{ user_registration_form | crispy }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-6">
+                <input type="submit" class="btn btn-outline-dark btn-block" value="Create Account">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

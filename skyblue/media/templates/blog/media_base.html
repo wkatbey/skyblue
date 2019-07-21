@@ -1,0 +1,104 @@
+{% extends 'static_website/base.html' %} 
+{% load static %} 
+
+{% block head_elements %}
+<link rel="stylesheet" href="{% static 'media/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'media/spacing.css' %}"> 
+<link rel="stylesheet" href="{% static 'media/hero_properties.css' %}"> 
+<link rel="stylesheet" href="{% static 'media/fonts.css' %}"> 
+{% endblock %} 
+
+{% block custom_media_head_elements %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    {% block media_heading %}
+    
+        <p class="heading-text padding-top padding-bottom text-center">
+            Portal 
+            <span class="media-heading-icon">
+                <i class="fas fa-wine-glass-alt"></i>
+            </span>
+        </p>
+    {% endblock %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    {% block navbar_item_1 %}
+                        <div class="media-nav-item">
+                            <i class="fas fa-bars"></i>
+                            <a class="gray-link" href="{% url 'media:media-list' %}">
+                                Portal
+                            </a>
+                        </div>
+                    {% endblock %}
+
+                    {% if user.is_authenticated %}
+                        {% block navbar_item_2 %}
+                            <div class="media-nav-item">
+                                <i class="fas fa-th-large"></i> 
+                                <a class="gray-link" href="{% url 'media:user-posts' user.id %}">
+                                    My Posts
+                                </a>
+                            </div>
+                        {% endblock %}
+
+                        {% block navbar_item_3 %}
+                            <div class="media-nav-item">
+                                <i class="fas fa-id-card"></i>
+                                <a class="gray-link" href="#">
+                                    My Profile
+                                </a>
+                            </div>
+                        {% endblock %}
+
+                        {% block navbar_item_4 %}
+                            <div class="media-nav-item">
+                                <i class="fas fa-users"></i> 
+                                <a class="gray-link" href="{% url 'user:user-list' %}">
+                                    Users
+                                </a>
+                            </div>
+                        {% endblock %}
+
+                        {% block navbar_item_5 %}
+                            <div class="media-nav-item">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <a class="gray-link" href="{% url 'user:logout' %}">
+                                    Log out
+                                </a>
+                            </div> 
+                        {% endblock %}
+                    {% else %}
+                        {% block navbar_item_6 %}
+                            <div class="media-nav-item">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <a class="gray-link" href="{% url 'user:login' %}">
+                                    Log in 
+                                </a>
+                            </div>  
+                        {% endblock %}
+                        {% block navbar_item_7 %}
+                            <div class="media-nav-item">
+                                <i class="fas fa-address-card"></i>
+                                <a class="gray-link" href="{% url 'user:register' %}">
+                                    Register 
+                                </a>
+                            </div>  
+                        {% endblock %}  
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    <hr>
+    </div>
+
+    {% block media_body %}
+
+    {% endblock %}
+
+{% endblock %}

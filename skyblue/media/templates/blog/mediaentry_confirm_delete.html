@@ -1,0 +1,61 @@
+{% extends 'static_website/base.html' %}
+{% load static %}
+
+{% block head_elements %}
+<link rel="stylesheet" href="{% static 'media/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'media/spacing.css' %}"> 
+<link rel="stylesheet" href="{% static 'media/hero-image.css' %}"> 
+<link rel="stylesheet" href="{% static 'media/fonts.css' %}"> 
+{% endblock %}
+
+{% block hero-image-type %}
+<div class="hero-media-small-image">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block body %}
+<div class="container">
+    <p class="heading-text text-center">Confirmation</p>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <div class="media-nav-item">
+                    <i class="fas fa-bars"></i>
+                    <a class="gray-link" href="{% url 'media:media-list' %}">
+                        Portal
+                    </a>
+                </div>
+                <div class="media-nav-item">
+                    <i class="fas fa-th-large"></i> 
+                    <a class="gray-link" href="#">
+                        My Posts
+                    </a>
+                </div>
+                <div class="media-nav-item">
+                    <i class="fas fa-id-card"></i>
+                    <a class="gray-link" href="#">
+                        My Profile
+                    </a>
+                </div>
+                <div class="media-nav-item">
+                    <i class="fas fa-users"></i> 
+                    <a class="gray-link" href="#">
+                        Users
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <form method="post">{% csrf_token %}
+        <p class="reading-font">Are you sure you want to delete "{{ object.title }}"?</p>
+        <input type="submit" class="btn btn-outline-dark" value="Confirm">
+    </form>
+</div>
+
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

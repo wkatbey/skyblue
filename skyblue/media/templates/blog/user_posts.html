@@ -1,0 +1,48 @@
+{% extends 'media/media_base.html' %} 
+{% load static %} 
+
+{% block custom_head_elements %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src='https://cdn.tiny.cloud/1/9lidlfl9gfd74zusr0iykq72dtxk48gnba2vupju5j0gdmfs/tinymce/5/tinymce.min.js'></script>
+<script>
+  tinymce.init({selector:'textarea'});
+</script>
+{% endblock %}
+
+{% block hero-image-type %}
+<div class="hero-media-small-image">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block media_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    {{ user_viewed.first_name }} {{user_viewed.last_name}}'s Posts
+</p>
+{% endblock %}
+
+{% block media_body %}
+<div class="container">
+    {% for media in medias %}
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="reading-font">
+                <a class="gray-link" href="{% url 'media:media-detail' media.id %}">{{ media.title }}</a>
+                {% if user.is_authenticated and media.author.id == user.id %}
+                <a class="gray-link media-heading-icon" href="{% url 'media:media-update' media.id %}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'media:media-delete' media.id %}" class="gray-link media-heading-icon">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

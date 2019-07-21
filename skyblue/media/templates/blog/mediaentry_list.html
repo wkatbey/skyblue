@@ -1,0 +1,72 @@
+{% extends 'media/media_base.html' %} 
+{% load static %} 
+
+{% block hero-image-type %}
+<div class="hero-media-image">
+{% endblock %} 
+
+{% block hero-image-text %}
+    <div class="container-fluid hero-media-text">
+        {% if user.is_authenticated %}
+        <p class="hero-media-heading text-center">Welcome, {{ user.first_name }}</p>
+        <p class="hero-media-subheading text-center">
+            Read and Write Entries
+        </p>
+        {% else %}
+        <p class="hero-media-heading text-center">SkyBlue Mediaging</p>
+        <p class="hero-media-subheading text-center">
+            A Simple Journaling Platform
+        </p>
+        {% endif %}
+    </div>
+{% endblock %} 
+
+{% block navbar_item_1 %}
+    {% if user.is_authenticated %}
+    <div class="media-nav-item">
+        <i class="fas fa-edit"></i>
+        <a class="gray-link" href="{% url 'media:media-create' %}">
+            Write a new Entry
+        </a>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block media_body %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <p class="heading-text text-center padding-top padding-bottom">
+        Current Topics
+        <span class="media-heading-icon">
+            <i class="fas fa-glass-cheers"></i>
+        </span>
+    </p>
+    {% for media in media_entries %}
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="reading-font">
+                <a class="gray-link" href="{% url 'media:media-detail' media.id %}">{{ media.title }}</a>
+                {% if user.is_authenticated and media.author.id == user.id %}
+                <a class="gray-link media-heading-icon" href="{% url 'media:media-update' media.id %}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'media:media-delete' media.id %}" class="gray-link media-heading-icon">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}

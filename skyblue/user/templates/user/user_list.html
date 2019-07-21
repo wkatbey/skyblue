@@ -1,0 +1,53 @@
+{% extends 'media/media_base.html' %} 
+{% load static %} 
+
+{% block custom_head_elements %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src='https://cdn.tiny.cloud/1/9lidlfl9gfd74zusr0iykq72dtxk48gnba2vupju5j0gdmfs/tinymce/5/tinymce.min.js'></script>
+<script>
+  tinymce.init({selector:'textarea'});
+</script>
+{% endblock %}
+
+{% block hero-image-type %}
+<div class="hero-media-small-image">
+{% endblock %} 
+
+{% block hero-image-text %}
+{% endblock %} 
+
+{% block media_heading %}
+<p class="heading-text padding-top padding-bottom text-center">
+    Authors 
+</p>
+{% endblock %}
+
+{% block media_body %}
+<div class="container padding-top">
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th scope="row">
+                    <a href="{% url 'user:user-profile'%}">
+                    {{ user.username }}
+                    </a>
+                </th>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block custom_footer_elements %}
+{% endblock %}
